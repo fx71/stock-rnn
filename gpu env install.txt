@@ -1,0 +1,7 @@
+This needs to be installed through anaconda CLI
+conda install tensorflow-gpu
+conda install matplotlib
+conda install pandas
+-------------- also possible required ----------------
+conda install scikit-learn
+conda install pillow 

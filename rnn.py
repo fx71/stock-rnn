@@ -6,7 +6,7 @@ units = 50
 dropout = 0.2
 historyReads = 60
 
-shape = 2
+shape = 3
 
 #loads previous model before fit
 loadModel = False

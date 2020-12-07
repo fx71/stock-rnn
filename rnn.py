@@ -1,12 +1,12 @@
 # Recurrent Neural Network
 
 # Part 0 constants
-epochs = 2
+epochs = 100
 units = 50
 dropout = 0.2
 historyReads = 60
 
-shape = 3
+shape = 2
 
 #loads previous model before fit
 loadModel = False
@@ -98,12 +98,16 @@ dataset_total = pd.concat((dataset_train.iloc[:, 1:shape+1], dataset_test.iloc[:
 inputs = dataset_total[len(dataset_total) - len(dataset_test) - historyReads:].values
 inputs = sc.transform(inputs)
 X_test = []
+y_test = []
 for i in range(historyReads, historyReads+20):
     X_test.append(inputs[i-historyReads:i, 0:shape])
-X_test = np.array(X_test)
+    y_test.append(inputs[i, 0])
+X_test, y_test = np.array(X_test), np.array(y_test)
 
 predicted_stock_price = regressor.predict(X_test)
 
+evaluateMetrics = regressor.evaluate(X_test, y_test, verbose=0)
+print("Evaluate metric is " + str(evaluateMetrics))
 
 
 predicted_stock_price_reshaped = np.array([[predicted_stock_price[0][0], 1, 1]])
